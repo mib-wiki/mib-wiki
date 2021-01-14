@@ -18,8 +18,12 @@ spec:
         application: MibWiki
         component: mysql
     spec:
+      volumes:
+        - name: mysql-config
+          configMap:
+            name: mysql-config
       containers:
-        - image: mysql:5.7
+        - image: mysql:8
           name: mysql
           ports:
             - containerPort: 3306
@@ -28,6 +32,8 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mysql-data
+            - mountPath: /etc/mysql/conf.d
+              name: mysql-config
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: lkm98jvsjsd;ue

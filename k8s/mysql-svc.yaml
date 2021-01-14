@@ -6,6 +6,10 @@ metadata:
     application: MibWiki
     component: mysql
 spec:
+  selector:
+    application: MibWiki
+    component: mysql
   ports:
     - name: mysql
       port: 3306
+      targetPort: 3306
