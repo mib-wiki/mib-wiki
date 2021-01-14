@@ -10,5 +10,5 @@
 
 * References
 
-** [[https://www.mediawiki.org/wiki/Manual:Importing_external_content][Mediwiki: Importing external content]] 
+** [[https://www.mediawiki.org/wiki/Manual:Importing_external_content][MediaWiki: Importing external content]] 
 ** [[https://www.mediawiki.org/wiki/Manual:Managing_data_in_MediaWiki][MediaWiki: Managing data in MediaWiki]] 
