@@ -1,8 +1,10 @@
 * Tools
+
 ** [[https://github.com/eerimoq/asn1tools][Python: asn1tools]] 
 ** [[https://pandoc.org/index.html][Pandoc: mediawiki format]] 
    
 * MediaWiki Extensions
+
 ** [[https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki][Semantic MediWiki]] 
    Enables storage and querying of machine readable formats in the wiki pages
 ** [[https://www.wikidata.org/wiki/Wikidata:Introduction][Wikidata]] 
