@@ -41,9 +41,9 @@ spec:
     - metadata:
         name: mysql-data
       spec:
-        volumeName: mysql-data
         accessModes:
           - ReadWriteOnce
+        storageClassName: managed-premium
         resources:
           requests:            
             storage: 20Gi
