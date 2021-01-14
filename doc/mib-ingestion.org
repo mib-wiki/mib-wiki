@@ -1,13 +1,16 @@
 * Tools
+
 ** [[https://github.com/eerimoq/asn1tools][Python: asn1tools]] 
 ** [[https://pandoc.org/index.html][Pandoc: mediawiki format]] 
    
 * MediaWiki Extensions
+
 ** [[https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki][Semantic MediWiki]] 
    Enables storage and querying of machine readable formats in the wiki pages
 ** [[https://www.wikidata.org/wiki/Wikidata:Introduction][Wikidata]] 
 *** [[https://doc.wikimedia.org/Wikibase/master/php/index.html][Wikibase: Code documentation]] 
+
 * References
-** [[  
-https://www.mediawiki.org/wiki/Manual:Importing_external_content][Mediwiki: Importing external content]] 
+
+** [[https://www.mediawiki.org/wiki/Manual:Importing_external_content][MediaWiki: Importing external content]] 
 ** [[https://www.mediawiki.org/wiki/Manual:Managing_data_in_MediaWiki][MediaWiki: Managing data in MediaWiki]] 
