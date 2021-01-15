@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    application: MibWiki
+    component: mysql
+spec:
+  selector:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: mib-wiki
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: mib-wiki
+data:
+  docker.cnf: |
+    [mysqld]
+    skip-host-cache
+    skip-name-resolve
+    default_authentication_plugin=mysql_native_password
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    app.kubernetes.io/name: mysql
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: mib-wiki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mysql
+      app.kubernetes.io/component: database
+      app.kubernetes.io/part-of: mib-wiki
+  serviceName: mysql
+  template:
+    metadata:
+      name: mysql
+      labels:
+        app.kubernetes.io/name: mysql
+        app.kubernetes.io/component: database
+        app.kubernetes.io/part-of: mib-wiki
+    spec:
+      volumes:
+        - name: mysql-config
+          configMap:
+            name: mysql-config
+      containers:
+        - image: mysql:8
+          name: mysql
+          ports:
+            - containerPort: 3306
+              name: mysql
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mediawiki-mysql-data
+            - mountPath: /etc/mysql/conf.d
+              name: mysql-config
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: lkm98jvsjsd;ue
+            - name: MYSQL_USER
+              value: mibs
+            - name: MYSQL_PASSWORD
+              value: MarblesFound?
+            - name: MYSQL_DATABASE
+              value: mib_wiki
+  volumeClaimTemplates:
+    - metadata:
+        name: mediawiki-mysql-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: managed-premium
+        resources:
+          requests:            
+            storage: 20Gi
