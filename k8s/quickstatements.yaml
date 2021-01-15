@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: quickstatements
+    app.kubernetes.io/component: ingestion
+    app.kubernetes.io/part-of: mib-wiki
+  name: quickstatements
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app.kubernetes.io/name: quickstatements
+    app.kubernetes.io/component: ingestion
+    app.kubernetes.io/part-of: mib-wiki
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: quickstatements
+    app.kubernetes.io/component: ingestion
+    app.kubernetes.io/part-of: mib-wiki
+  name: quickstatements
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: quickstatements
+      app.kubernetes.io/component: ingestion
+      app.kubernetes.io/part-of: mib-wiki
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: quickstatements
+        app.kubernetes.io/component: ingestion
+        app.kubernetes.io/part-of: mib-wiki
+    spec:
+      containers:
+        - env:
+            - name: QS_PUBLIC_SCHEME_HOST_AND_PORT
+              value: http://localhost:9191
+            - name: WB_ITEM_NAMESPACE
+              value: "120"
+            - name: WB_ITEM_PREFIX
+              value: 'Item:'
+            - name: WB_PROPERTY_NAMESPACE
+              value: "122"
+            - name: WB_PROPERTY_PREFIX
+              value: 'Property:'
+            - name: WB_PUBLIC_SCHEME_HOST_AND_PORT
+              value: http://localhost:8181
+            - name: WIKIBASE_SCHEME_AND_HOST
+              value: http://wikibase
+          image: wikibase/quickstatements:latest
+          name: quickstatements
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+
